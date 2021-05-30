@@ -23,8 +23,7 @@ async def alive(ctx):
 
 @client.event()
 async def on_voice_state_update(member, before, after):
-    if after != before:
-        await ctx.send(f"{member} is stupid")
+    print(member)
 
 
 # END OF BOT CODE
