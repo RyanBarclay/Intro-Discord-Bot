@@ -13,15 +13,6 @@ introList = []
 client.remove_command("help")
 
 
-class MyClient(discord.Client):
-    async def on_message(self, message):
-        if message.author == self.user:
-            return
-
-        if message.content.startswith("$hello"):
-            await message.channel.send("Hello World!")
-
-
 # answers with the ms latency
 @client.command()
 async def alive(ctx):
@@ -30,9 +21,10 @@ async def alive(ctx):
     )
 
 
-@client.command()
-async def test(ctx):
-    await ctx.send(f"This was returned: {client.voice_clients}")
+@client.event()
+async def on_voice_state_update(member, before, after):
+    if after != before:
+        await ctx.send(f"{member} is stupid")
 
 
 # END OF BOT CODE
